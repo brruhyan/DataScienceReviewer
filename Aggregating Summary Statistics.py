@@ -1,5 +1,6 @@
 #This part covers the basics of aggregating summary statistics in a dataframe
 import pandas as pd
+import numpy as np
 pd.read_csv('salesDf.csv')
 
 #Aggregating the mean and median of a dataframe
