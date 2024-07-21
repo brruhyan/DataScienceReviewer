@@ -4,5 +4,6 @@
 
 #Sorting values by a specific column
 df = df.sort_values('column_name')
+#Sorting two columns at once, sorting column_name1 by ascending order and column_name2 by descending order
 df = df.sort_values('column_name', ascending = False) 
-df = df.sort_values(['column_name1, column_name2'], ascending = [True, False]) #Sorting two columns at once, sorting column_name1 by ascending order and column_name2 by descending order
+df = df.sort_values(['column_name1, column_name2'], ascending = [True, False]) 
