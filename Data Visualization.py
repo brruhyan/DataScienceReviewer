@@ -41,13 +41,17 @@ plt.show()
 sns.relplot(x = 'metric_a', y = 'metric_b', data = df, size = 'cylinders', kind = 'scatter',
            style = 'origin', hue = 'metric_hue')
 
-#creating lineplots
-#note that confidence interval (ci) could be modified. 
-#other parameters include dashes, style, markers, as well as hue
+#creating lineplots, refer to the documentation for more parameters.
 sns.relplot(x = 'metric_a', y = 'metric_b', data = df, kind = 'line', ci = 'sd' )
 
 #creating categorical plots
 #similar with relplot col could be removed
 #in order to use the order parameter, first create a list of categories and pass it to the order parameter
 sns.catplot(y = 'metric_a', data = df, kind = 'count', col = 'category')
-sns.catplot(x = 'metric_a' ,y = 'metric_b', data = df, kind = 'bar', col = 'category', order = categories)       
+sns.catplot(x = 'metric_a' ,y = 'metric_b', data = df, kind = 'bar', col = 'category', order = categories)   
+
+#creating boxplots, the sym parameter omits outliers in the data
+sns.catplot(x = 'metric_a', y = 'metric_b', data = df, sym = '', kind = 'box')
+
+#creating point plots
+sns.catplot(x = 'metric_a', y = 'metric_b' data = df, capsize = 0.2, kind = 'point', join = False)
