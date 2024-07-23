@@ -17,10 +17,6 @@ population_data['Telephone_Number'} = population_data['Telephone_Number'].str.re
 #converting the data type
 population_data['Age'] = population_data['Age'].astype(int)
 
-#extracting the year from a date column
-graduation_data['graduation_year'] = graduation_data['graduation_date'].dt.year
-graduation_data["graduation_month"] = graduation_data["graduation_date"].dt.month
-
 #visualizing multiple variable relationships
 sns.pairplot(data = graduation_data, vars = ['graduation_date', 'average_grade'])
 
