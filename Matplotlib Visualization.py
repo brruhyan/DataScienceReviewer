@@ -33,3 +33,9 @@ def plot_timeseries(axes, x, y, color, xlabel, ylabel):
         axes.set_ylabel(ylabel, color = color)
         axes.tick_params('y', colors = color)
         
+#how to use the function
+plot_timeseries(ax2, graduation_data.index, graduation_data['average_grade],
+                red, "Insert Label 1", 'Insert Label 2")
+
+#annotating your plots
+ax.annotate("Insert String", xy = (pd.Timestamp('specific time'), 95)) #annotates the graduation_year that exceeded 95% passing.       
