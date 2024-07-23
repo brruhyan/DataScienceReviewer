@@ -1,7 +1,6 @@
 #creating a histogram
 sns.histplot(data = df, x = 'data', binwidth = 1)
 
-
 #defining a series of data that are not part of a certain group
 #in this context. printing the not_student will print out all values, except the student data
 not_student = ~population_data['demographics'].isin(['Student'])
