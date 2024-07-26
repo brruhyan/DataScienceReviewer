@@ -45,3 +45,10 @@ HAVING COUNT(name) > 500 -- shows the year where there are more than 500 graduat
 SELECT name, ROUND(AVG(student_grade), 2) AS average_student_grade 
 FROM graduation_data GROUP BY student_course 
 HAVING AVG(student_grade) > 90 ORDER BY average_student_grade DESC;
+
+-- combination of all aggregation (prints the student data with the highest average grade)
+SELECT graduation_date, AVG(student_grade) AS avg_grade, AVG(study_time) AS avg_study_time
+FROM graduation_data WHERE graduation_date > 2015
+GROUP BY graduation_date HAVING AVG(student_grade) > 90
+ORDER avg_study_time DESC
+LIMIT 1;
