@@ -51,10 +51,23 @@ WHERE graduation_data BETWEEN 2010 AND 2015 AND student_course = 'CpE';
 
 -- Filtering text (Will select names starting with Ch)
 SELECT name FROM graduation_data
-WHERE name LIKE 'Ch%'; 
+WHERE name LIKE 'Ch%'; -- put the % before the string to find names that ends with Ch
 
 -- Filtering text (will only match three letter names starting from Ev)
-WHERE name LIKE 'Ev_' ;
+WHERE name LIKE 'Ev_%' ; -- put the _ before the string to find names whose 2nd and 3rd letter in their name is Ev
 
 -- Filtering text (will not select names starting with A)
-WHERE name NOT LIKE 'A%';
+WHERE name NOT LIKE 'A%'; 
+
+-- specifiying multiple values in a where clause
+SELECT name FROM graduation_data
+WHERE graduation_date IN (2001, 2002, 2003); -- OR conditions
+
+-- Null values
+SELECT name FROM graduation_data
+WHERE birth_date IS NULL;
+
+-- Counting the number of null values
+SELECT COUNT(*) AS null_values
+FROM graduation_data WHERE birth_date IS NULL;
+
