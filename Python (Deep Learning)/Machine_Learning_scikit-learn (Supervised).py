@@ -19,7 +19,7 @@ knn = KNeighborsClassifier(n_neighbords = 15)
 knn.fit(x,y)
 print(knn.score(X_test, y_test))
 
-#model complexity curve 
+#model complexity curve (finding which k parameter is best for learning)
 train_accuracies = {}
 test_accuracies = {}
 neighbors = np.arange(1,26)
