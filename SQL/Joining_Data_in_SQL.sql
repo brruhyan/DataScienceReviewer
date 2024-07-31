@@ -60,6 +60,7 @@ ON c.code = p.country_code WHERE year = 2010
 ORDER BY life_exp LIMIT 5;
 
 -- full join
+-- all data will be joined regardless of repetition 
 SELECT p1.country AS country, p1.prime_minister, p2.president
 FROM prime_ministers AS p1
 FULL JOIN presidents AS p2 ON p1.country = p2.country
@@ -73,6 +74,7 @@ WHERE region = 'North America' OR name IS NULL
 ORDER BY region;
 
 -- cross joins
+-- all possible combinations of both tables will be the output
 SELECT p1.prime_minister, p2.president
 FROM prime_ministers AS p1
 CROSS JOIN presidents AS p2
