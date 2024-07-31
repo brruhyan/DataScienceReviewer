@@ -38,4 +38,22 @@ plt.legend()
 plt.xlabel("Varying Number of Neighbors")
 plt.ylabel("Accuracy")
 plt.show()
-        
+
+#-------------------------------------
+
+# Regression Models (Target must be either 0 or 1)
+X = diabetesDf.drop('glucose', axis = 1).values #drops glucose and stores everything else as x
+y = diabetes['glucose'].values #target column
+
+# making predictions on a single feature
+X_specific_column = X[:,3] #in this case this index is equal to bmi
+X_specific_column = X_specific_column.reshape(-1,1)
+#fitting the model
+from sklearn.linear_model import LinearRegression
+reg = LinearRegression()
+reg.fit(X_specific_column, y)
+predictions = reg.predict(X_specific_column)
+plt.scatter(X_specific_column, predictions)
+plt.show()
+
+
