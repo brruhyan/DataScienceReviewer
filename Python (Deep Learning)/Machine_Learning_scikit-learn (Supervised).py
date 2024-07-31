@@ -56,4 +56,26 @@ predictions = reg.predict(X_specific_column)
 plt.scatter(X_specific_column, predictions)
 plt.show()
 
+# Linear Regression with all features
+x_train, x_test, y_train, y_test = train_test_split(x,y, test_size = 0.3,
+                                                    random_state = 42)
+regression = LinearRegression()
+regression.fit(x_train, y_train)
+y_pred = regression.predict(x_test)
 
+#-------------------------------------
+
+# Evaluation model performance
+
+# r-squared (high value indicates that the variance is correlated to the independent value)
+regression.score(x_test, y_test)
+
+# mean squared error
+from sklearn.metrics import mean_squared_error
+mean_squared_error(y_test, y_pred, squared = False)
+print("R^2: {}".format(regression))
+print("RMSE: {}".format(mean_squared_error))
+
+#-------------------------------------
+
+# Cross Validation
