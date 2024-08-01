@@ -47,4 +47,16 @@ print(roc_auc_score(y_test, y_pred_prob))
 
 #-------------------------------------
 
-# Hyperparameter Tuning
+# Hyperparameter Tuning 
+# it is essential to cross-validate to avoid overfitting the parammeters to the test set
+
+# Grid Searching (cross validation)
+from sklearn_model.selection import GridSearchCV
+kf = KFold(n_splits = 5, shuffle = True, random_state = 42)
+param_grid = {"alpha" : np.arange(0.0001, 1, 10),
+              "solver": ['saq', 'lsqr']}
+ridge = Ridge()
+ridge_cv = GridSearchCV(ridge, param_grid, cv = kf)
+ridge_cv.fit(X_train, y_train)
+print(ridge_cv.best_params_, ridge_cv.best_score_)
+                         
