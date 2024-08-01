@@ -60,3 +60,17 @@ ridge_cv = GridSearchCV(ridge, param_grid, cv = kf)
 ridge_cv.fit(X_train, y_train)
 print(ridge_cv.best_params_, ridge_cv.best_score_)
                          
+# Random Search CV (alternative to grid searching since it takes long)
+from sklearn.model_selection import RandomizedSearchCV
+kf = KFold(n_splits = 5, shuffle = True, random_state = 42)
+param_grid = {"alpha" : np.arange(0.0001, 1, 10),
+              "solver": ['saq', 'lsqr']}
+ridge = Ridge()
+ridge_cv = RandomizedSearchCV(ridge, param_grid, cv = kf, n_iter = 2) #n-iter determines the number of parameters tested (n_splits * n_iter)
+ridge_cv.fit(X_train, y_train)
+print(ridge_cv.best_params_, ridge_cv.best_score_)
+
+# evaluating 
+test_score = ridge_cv.score(X_test, y_test)
+print(test_score)
+
