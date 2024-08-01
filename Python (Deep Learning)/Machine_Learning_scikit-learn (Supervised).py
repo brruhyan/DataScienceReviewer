@@ -65,8 +65,7 @@ y_pred = regression.predict(x_test)
 
 #-------------------------------------
 
-# Evaluation model performance
-
+# Evaluation of model performance
 # r-squared (high value indicates that the variance is correlated to the independent value)
 regression.score(x_test, y_test)
 
