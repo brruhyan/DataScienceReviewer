@@ -36,7 +36,7 @@ print(np.sqrt(-linear_cv))
 music_df = music_df.dropna(subset = ['genre', 'popularity', 'loudness'])
 
 # imputation (categorical values)
-from sklearn.imput import SimpleImputer
+from sklearn.impute import SimpleImputer
 x_category = music_df['genre'].values,reshape(-1,1)
 x_num = music_df.drop(['genre', 'popularity'], axis = 1).values
 y  = music_df['popularity'].values
@@ -63,3 +63,15 @@ music_df = music_df.dropna(subset = ['genre', 'popularity', 'loudness'])
 music_df['genre'] = np.where(music_df['genre'] == 'Rock', 1,0) #replaces rock genre with 1
 X = music_df.drop('genre', axis = 1).values
 y = music_df['genre'].values
+#instantiating the pipeline
+steps = [('imputation', SimpleImputer()),
+         ('logistic_regression', LogisticRegression())]\
+pipeline = Pipeline(steps)
+X_train, X_test, y_train, y_test = train_test_split(X,y, test_size = 0.3,
+                                                    random_state = 42)
+pipeline.fit(X_train, y_train)
+pipeline.score(X_test, y_test)
+
+#-------------------------------------
+
+# Centering and scaling
