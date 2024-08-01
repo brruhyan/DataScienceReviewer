@@ -110,3 +110,17 @@ for alpha in [0.1, 1.0, 10.0, 100.0, 1000.0]:
   lasso_predict = ridge.predict(X_test)
   scores.append(lasso.score(X_test, y_test))
 print(scores)
+
+#-------------------------------------
+
+# Feature Selection with Lasso
+from sklearn.linear_model import Lasso
+X = diabetes_df.drop("glucose", axis = 1).values
+y = diabetes_df['glucose'].values
+names = diabetes_df.drop("glucose", axis = 1).columns
+lasso = Lasso(alpha = 0.1)
+lasso_coef = lasso.fit(X,y).coef_
+#plotting the coefficient for each feature
+plt.bar(names, lasso_coef)
+plt.xticks(rotation = 45) #the higher the coefficient the more important it is
+plt.show()
