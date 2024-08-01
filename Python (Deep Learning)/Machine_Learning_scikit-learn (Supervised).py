@@ -75,6 +75,38 @@ mean_squared_error(y_test, y_pred, squared = False)
 print("R^2: {}".format(regression))
 print("RMSE: {}".format(mean_squared_error))
 
+# Cross Validation 
+# cross validation is to avoid generalization on unseen data
+
+from sklearn.model_selection import cross_val_score, KFold
+kf = KFold(n_splits = 6, shuffle = True, random_state = 62)
+reg = LinearRegression()
+cross_val = cross_val_score(reg, X,y, cv = kf)
+print(cross_val)
+print(np.mean(cross_val), np.std(cross_val)) 
+print(np.quantile(cross_val), [0.025, 0.975) # confidence interval
+
 #-------------------------------------
 
-# Cross Validation
+# Regularzation
+# Ridge regression (the performance of the model gets worse as alpha  increases)
+from sklearn.linear_model import Ridge
+scores = []
+for alpha in [0.1, 1.0, 10.0, 100.0, 1000.0]:
+  ridge = Ridge(alpha = alpha)
+  ridge.fit(X_train, y_train)
+  y_predict = ridge.predict(X_test)
+  scores.append(ridge.score(X_test, y_test))
+print(scores)
+
+# Lasso regression
+# THIS IS USED TO SELECT THE IMPORTANT FEATURES OF A DATASET (shrinks the coefficient of less imporatnt features to 0)
+# The performance of the model decreases as the alpha exceeds 20
+from sklearn.linear_model import Lasso
+scores = []
+for alpha in [0.1, 1.0, 10.0, 100.0, 1000.0]:
+  lasso = Lasso(alpha = alpha)
+  lasso.fit(X_train, y_train)
+  lasso_predict = ridge.predict(X_test)
+  scores.append(lasso.score(X_test, y_test))
+print(scores)
