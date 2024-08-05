@@ -49,7 +49,32 @@ student['course'] = student['course'].cat.remove_categories(
   removals = ['CS', 'IS'])
 
 # rename categories
+replace_map = {'CS' : 'Comp Sci'}
 student['course'] = student['course'].cat.rename_categories('CS' : 'Computer Science')
+student['course'] = student['course'].cat.replace(replace_map)
+
+# reordering categories
+student['year_level'] = student['year_level'].cat_reorder_categories(
+  new_categories = ['1st', '2nd', '3rd', '4th', '5th'], 
+  ordered = True)
 
 # printing out categories
 print(student['course'].cat.categories
+      
+# ---------cleaning anc accessing data-------------------------
+
+# removing spaces from data
+student['course'] = student['course'].str.strip()
+
+# capitalization
+student['Name'] = student['Name'].str.title()
+
+# accessing data with specific strings
+student['Name'].str.contains('Bry', regex = False)
+# accessing with a loc
+student.loc[student['Course'] == 'CpE', 'Irregular'].value_counts(sort = False)
+
+
+
+
+
