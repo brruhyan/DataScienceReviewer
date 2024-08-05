@@ -84,7 +84,17 @@ with engine.connect() as con:
   df.columns = rs.keys()
 
 # querying in one line using pandas
+engine = create_engine('sqlite:///Student_data.sqlite')
 df = pd.read_sql_query('SELECT * FROM Students', engine)
 
 # ----- advanced relational database -----
 
+# inner joining with pandas
+engine = create_engine('sqlite:///Order_data.sqlite')
+df = pd.read_sql_query('SELECT OrderID, CompanyName FROM Orders
+                       INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID', engine)
+
+
+# -- END 
+    
+                       
