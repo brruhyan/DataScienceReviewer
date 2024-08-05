@@ -43,3 +43,17 @@ with SAS7BDAT('filename_here.sas7bdat') as file:
 data = pd.read_stata('filename_here.dta')
 
 # importing HDF5 files 
+import h5py
+filename = 'filename_here.hdf5'
+data = h5py.File(filename, 'r')
+
+# exploring the HDF5 file
+for key in data.keys():
+  print(key)
+
+# importing MATLAB files
+import scipy.io
+filename = 'filename_here.mat'
+mat = scipy.io.loadmat(filename)
+
+# ----- relational databases in Python -----
