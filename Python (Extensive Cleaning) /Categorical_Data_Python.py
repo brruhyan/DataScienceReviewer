@@ -61,7 +61,7 @@ student['year_level'] = student['year_level'].cat_reorder_categories(
 # printing out categories
 print(student['course'].cat.categories
       
-# ---------cleaning anc accessing data-------------------------
+# ---------cleaning and accessing data-------------------------
 
 # removing spaces from data
 student['course'] = student['course'].str.strip()
@@ -74,7 +74,56 @@ student['Name'].str.contains('Bry', regex = False)
 # accessing with a loc
 student.loc[student['Course'] == 'CpE', 'Irregular'].value_counts(sort = False)
 
+# ---------visualization with categorical data-------------------------
 
+# box plot
+sns.catplot(
+  x = 'Course', y = 'average_grade,
+  data = student_data, kind = 'box)
 
+#bar charts
+sns.catplot(x = 'Course', y = 'average_grade,
+            data = student_data, kind = 'bar')
+#pair plot
+sns.catplot(x = 'Course', y = 'average_grade', data = student_data,
+            hue = 'Irregular', dodge = True, kind = 'point')
 
+# multiple categories using catplots (facetgrid)
+# separates irregular students and non-irreg students and then plots the number of students in each course (irreg or not)
+sns.catplot(x = 'Irregular', kind = 'count',
+            col = 'Course', col_wrap = 2, 
+            palette = sns.color_palette('Set1', data = student_data))
 
+#customizing your plots
+ax.fig.suptitle('insert string here')
+ax.set_axis_labels('insert string here')
+plt.subplots_adjust(top = .9)     
+sns.set(font_scale = 1.4)
+sns.set_style("whitegrid")
+
+# ---------encoding---------------------------------------
+
+# one hot encoding basics
+student_data = pd.get_dummies(student_data['Course'])
+
+#specific data
+student_data_onehot = pd.get_dummies(student_data, columns = ['Course'], prefix = "")
+                              
+# label encoding (assigns a number to the course based on alphabetical order)
+student_data['course_id'] = student_data['course'].cat.codes
+
+# creating a code map (for large datasets)
+codes = student_data['course'].cat.codes
+categories = student_data['course']
+name_map = dict(zip(codes, categories))
+
+# boolean coding (if yes = 1, no = 0)
+student_data['Irregular'] = np.where(
+  student_data['Irregular'].str.contains('Yes', regex = False), 1,0)
+
+# updating NaN values
+student.loc[student['student_type'].isna(), 'student_type'] = 'dropped'
+
+# ----end--
+
+                
