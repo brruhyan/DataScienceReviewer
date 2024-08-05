@@ -57,3 +57,34 @@ filename = 'filename_here.mat'
 mat = scipy.io.loadmat(filename)
 
 # ----- relational databases in Python -----
+
+# creating a database engine (SQLAlchemy)
+from sqlalchemy import create_engine
+engine = create_engine('sqlite:///Student_data.sqlite')
+
+# explore the values in the database
+table_names = engine.table_names()
+print(table_names)
+
+# querying the database in python
+from sqlalchemy import create_engine
+import pandas as pd
+engine = create_engine('sqlite:///Student_data.sqlite')
+con = engine.connect()
+# executing the actual query
+rs = con.execute('SELECT * FROM Courses')
+df = pd.DataFrame(rs.fetchall()) # storing it in a dataframe
+df.columns = rs.keys()
+con.close()
+
+# querying but with a context manager
+with engine.connect() as con:
+  rs = con.execute('SELECT StudentID, AverageGrade, CourseName FROM Students')
+  df = pd.Dataframe(rs.fetchmany(size = 5))
+  df.columns = rs.keys()
+
+# querying in one line using pandas
+df = pd.read_sql_query('SELECT * FROM Students', engine)
+
+# ----- advanced relational database -----
+
