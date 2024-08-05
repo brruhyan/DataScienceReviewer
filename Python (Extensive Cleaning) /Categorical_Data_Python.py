@@ -1,4 +1,4 @@
-# initial exploration of categorical data
+# intitial exploration
 
 print(student_data['average_grade'].describe())
 print(student_data['average_grade'].value_counts()) #frequency table
@@ -19,7 +19,7 @@ new_category = pd.Categorical(my_categories, categories = ['ENSE', 'CpE', 'CE', 
 student_dtypes = {'Course' : 'category'}
 student = pd.read_csv('student_data.csv', dtype = student_dtypes)
 
-# ------------------------------------
+# ----------grouping data for aggregation------------------------
 
 # grouping data by categories in pandas
 student_group = student_data.groupby(by = ['Course'].mean())
@@ -30,7 +30,7 @@ student_group = student_data.groupby(by = ['Course'])['Age', 'ave_grade'].sum()
 # grouping by multiple columns 
 student_group = student_data.groupby(by = ['Course', 'Sex'])['average_grade].mean()
 
-# ------------------------------------
+# ---------manipulating categories---------------------------
 
 # settings category values
 student['course'] = student['course'].astype('category')
@@ -47,3 +47,9 @@ student['course'] = student['course'].cat.add_categories(
 # removing categories
 student['course'] = student['course'].cat.remove_categories(
   removals = ['CS', 'IS'])
+
+# rename categories
+student['course'] = student['course'].cat.rename_categories('CS' : 'Computer Science')
+
+# printing out categories
+print(student['course'].cat.categories
