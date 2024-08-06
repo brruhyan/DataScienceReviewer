@@ -32,5 +32,18 @@ student_graduation[duplicated].sort_values(by = 'first_name')
 # dropping the duplicates
 student_graduation.drop_duplicates(inplace = True)
 
-# ----- text and categorical data problems -----
+# ----- text and categorical data problems (value membership constraints)-----
 
+# categorical problems
+categories['student_course'] = categories['student_course'] = ['CE' , 'CpE' 'ME']
+
+# finding incosistent categories (finds the courses that are in student_graduation that are not in the categories table)
+inconsistent = set(student_graduation['student_course']).difference(categories['student_course']) 
+print(inconsistent)
+inconsistent_rows = student_graduation['student_course'].isin(inconsistent)
+student_graduation[inconsistent_rows]
+
+# dropping the inconsistent categories
+consistent_data = student_graduation[~inconsistent_rows]
+
+# ----- value inconsistency-----
