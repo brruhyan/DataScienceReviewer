@@ -71,4 +71,5 @@ mapping = {'CpE' : 'Tech-related', 'IS' : 'Tech-related',
 course_category['student_course'] = course_category['student_course'].replace(mapping)
 course_category['student_course'].unique()
 
+# cleaning text data
 
