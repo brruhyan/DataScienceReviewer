@@ -47,3 +47,28 @@ student_graduation[inconsistent_rows]
 consistent_data = student_graduation[~inconsistent_rows]
 
 # ----- value inconsistency-----
+
+# same categories but with different spelling and capitalization
+student_graduation['student_course'] = student_graduation['student_course'].str.upper()
+student_graduation['student_course'] = student_graduation['student_course'].str.lower()
+
+# same category but with varying spaces
+student_courses = student_graduation['student_course'].str.strip()
+
+# collapsing data into categories 
+# from average_grade we can collapse it into High, Average, and Low
+import pandas as pd
+ranges = [75, 85, 95]
+group_names = ['High', 'Average', 'Low'] 
+# create the student performance column
+student_graduation['student_performance'] = pd.cut(student_graduation['average_grade'], bins = ranges,
+                                                   labels = group_names)
+
+# consolidating data into one category
+# CpE, IS to one category named tech-related course
+mapping = {'CpE' : 'Tech-related', 'IS' : 'Tech-related', 
+           'CE' : 'Civil-related', 'Arki' : 'Civil-related'}
+course_category['student_course'] = course_category['student_course'].replace(mapping)
+course_category['student_course'].unique()
+
+
