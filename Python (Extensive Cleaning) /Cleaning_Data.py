@@ -21,3 +21,16 @@ student_graduation.loc[student_graduation['graduation_date'] < dt.date.today(), 
 
 # converting a date object type to a an actual date data type
 student_graduation['graduation_date'] = pd.to_datetime(student_graduation['graduation_date']).dt.date
+
+# ----- duplicate data problems -----
+
+# finding the duplicate values
+column_names = ['first_name', 'last_name', 'address']
+duplicated = student_graduation.duplicated(subset = column_names, keep = False)
+student_graduation[duplicated].sort_values(by = 'first_name')
+
+# dropping the duplicates
+student_graduation.drop_duplicates(inplace = True)
+
+# ----- text and categorical data problems -----
+
