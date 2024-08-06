@@ -17,7 +17,7 @@ student_graduation[student_graduation['graduation_date'] < dt.date.today()] # up
 student_graduation.drop(student_graduation[student_graduation['graduation_date'] < dt.date.today()].index, inplace = True)
 
 # converting wrong date time to the correct time
-student_graduation.loc[student_graduation['graduation_date'] < dt.date.today(), 'graduation_date'] = dt.date.today() # insert another time if ever
+student_graduation.loc[student_graduation['graduation_date'] < dt.date.today(), 'graduation_date'] = dt.date.today() 
 
 # converting a date object type to a an actual date data type
 student_graduation['graduation_date'] = pd.to_datetime(student_graduation['graduation_date']).dt.date
