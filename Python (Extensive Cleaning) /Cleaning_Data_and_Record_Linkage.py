@@ -159,3 +159,5 @@ studentB_duplicates = student_dataB[studentDataB.isin(duplicated_match)]
 studentB_new = student_dataB[~student_dataB.index.isin(studentB_duplicates)]
 # appending
 consolidated_data = student_dataA.append(studentB_new)
+
+# ----- END
