@@ -1,4 +1,4 @@
-# ----- Basic data problems -----
+# ---------- Basic data problems ----------
 
 # converting strings to integers (in the case that revenue has a currency sign)
 sales['Revenue'] = sales['Revenue'].str.strip('₱')
@@ -22,7 +22,7 @@ student_graduation.loc[student_graduation['graduation_date'] < dt.date.today(), 
 # converting a date object type to a an actual date data type
 student_graduation['graduation_date'] = pd.to_datetime(student_graduation['graduation_date']).dt.date
 
-# ----- duplicate data problems -----
+# ---------- duplicate data problems ----------
 
 # finding the duplicate values
 column_names = ['first_name', 'last_name', 'address']
@@ -32,7 +32,7 @@ student_graduation[duplicated].sort_values(by = 'first_name')
 # dropping the duplicates
 student_graduation.drop_duplicates(inplace = True)
 
-# ----- text and categorical data problems (value membership constraints)-----
+# ----- text and categorical data problems (value membership constraints) -----
 
 # categorical problems
 categories['student_course'] = categories['student_course'] = ['CE' , 'CpE' 'ME']
@@ -46,7 +46,7 @@ student_graduation[inconsistent_rows]
 # dropping the inconsistent categories
 consistent_data = student_graduation[~inconsistent_rows]
 
-# ----- value inconsistency-----
+# ---------- value inconsistency ----------
 
 # same categories but with different spelling and capitalization
 student_graduation['student_course'] = student_graduation['student_course'].str.upper()
@@ -80,4 +80,20 @@ student_data.loc[digits < 10, 'phone_number'] = np.nan
 # cleaning symbols
 student_data['phone_number'].str.replace(r'\D+', '')
 
-# ----- advanced data problems -----
+# ---------- advanced data problems ----------
+
+# uniformity (identifying outliers and converting them accordingly)
+temp_fah = temperatures.loc[temperatures['Temperature'] > 40, 'Temperature']
+temp_cels = (temp_fah - 32) * (5/9)
+temperatures.loc[temperatures['Temperatute'] > 40, 'Temperature'] = temp_cels
+
+# datetime uniformity 
+student_data['Birthday'] = pd.to_datetime(student_data['Birthday'],
+                                          infer_datetime_format = True,
+                                          errors = 'coerce')
+
+# changing the datetime format
+student_data['Birthdays'] = student_data['Birthdays'].dt.strftime('%d-%m-%Y')
+
+# cross field validation
+                                                                  
