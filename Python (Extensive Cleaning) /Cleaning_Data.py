@@ -95,5 +95,38 @@ student_data['Birthday'] = pd.to_datetime(student_data['Birthday'],
 # changing the datetime format
 student_data['Birthdays'] = student_data['Birthdays'].dt.strftime('%d-%m-%Y')
 
-# cross field validation
+# cross field validation (checks value integrity)
+summary_courses = student_courses[['CpE', 'CE', 'ME']].sum(axis = 1)
+# the total number of students per course must equal to the total column
+student_total = summary_courses == student_data['total_students'] 
+
+# cross field validation example (looking at the birthday to see if it equals to their age)
+student_data['Birthday'] = pd.to_datetime(student_data['Birthday'])
+today = dt.date.today()
+age_calc = today.year - student_data['Birthday'].dt.year
+age_equals = age_calc == student_data['Age']
+# filtering ages that are not equal
+inconsistent_age = student_data[~age_equals]
+consistent_age = student_data[age_equls
                                                                   
+# ---------- visualizing and understanding missing data ----------
+
+# visualization of missing data
+import missingno as msno
+import matplotlib.pyplot as plt
+msno.matrix(student_data)
+plt.show()
+
+# isolating first and then visualizing
+missing = student_data[student_data['average_grade'].isna()]
+missing.describe()
+# visualizing the isolated data
+sorted_ave = student_data.sort_values(by = 'average_grade')
+msno.matrix(sorted_ave)
+plt.show()
+
+# imputing without machine learning
+student_grade_mean = student_data['average_grade'].mean()
+student_imputed = student_data.fillna({'average_grade' : student_grade_mean})
+
+# ---------- record linkage ----------
