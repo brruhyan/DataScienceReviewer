@@ -71,5 +71,13 @@ mapping = {'CpE' : 'Tech-related', 'IS' : 'Tech-related',
 course_category['student_course'] = course_category['student_course'].replace(mapping)
 course_category['student_course'].unique()
 
-# cleaning text data
+# cleaning text data and standardizing data
+student_data['phone_number'] = student_data['phone_number'].str.replace("+", "00")
+student_data['phone_number'] = student_data['phone_number'].str.replace("-", "")
+# replacing invalid numbers to NaN
+digits = student_data['phone_number'].str.len()
+student_data.loc[digits < 10, 'phone_number'] = np.nan
+# cleaning symbols
+student_data['phone_number'].str.replace(r'\D+', '')
 
+# ----- advanced data problems -----
