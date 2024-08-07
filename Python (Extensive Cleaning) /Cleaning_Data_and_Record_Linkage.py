@@ -151,6 +151,11 @@ compare_cl.string('surname', 'surname', threshold = 0.85, label = 'surname')
 compare_cl.string('address', 'address', threshold = 0.85, label = 'surname')
 # finding the matches
 potential_match = compare_cl.compute(pairs, student_dataA, student_dataB)
-potential_match[potential_match.sum(axis = 1) =>2]
+potential_match[potential_match.sum(axis = 1) => 3]
 # finally linking the data
-
+potential_match.index
+duplicated_match = potential_match.get_level_values(1)
+studentB_duplicates = student_dataB[studentDataB.isin(duplicated_match)]
+studentB_new = student_dataB[~student_dataB.index.isin(studentB_duplicates)]
+# appending
+consolidated_data = student_dataA.append(studentB_new)
