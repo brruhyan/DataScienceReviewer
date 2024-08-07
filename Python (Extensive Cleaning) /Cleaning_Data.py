@@ -130,3 +130,27 @@ student_grade_mean = student_data['average_grade'].mean()
 student_imputed = student_data.fillna({'average_grade' : student_grade_mean})
 
 # ---------- record linkage ----------
+
+# minumum edit distance algorithms (strings)
+from thefuzz import fuzz
+fuzz.WRatio('String', 'Striing') # calculates the similarity ratio
+
+# generating pairs from two different tables through linking
+import recordlinkage
+indexer = recordlinkage.Index()
+indexer.block('student_id')
+pairs = indexer.index(student_dataA, student_dataB)
+                
+# find potential matches
+pairs = indexer.index(student_dataA, student_dataB)
+compare_cl = recordlinkage.Compare()
+compare_cl.exact('birthday', 'birthday', label = 'date_of_birth')
+compare_cl.exact('student_id', 'student_id', label = 'student_number')
+# string similariities before joining
+compare_cl.string('surname', 'surname', threshold = 0.85, label = 'surname')
+compare_cl.string('address', 'address', threshold = 0.85, label = 'surname')
+# finding the matches
+potential_match = compare_cl.compute(pairs, student_dataA, student_dataB)
+potential_match[potential_match.sum(axis = 1) =>2]
+# finally linking the data
+
