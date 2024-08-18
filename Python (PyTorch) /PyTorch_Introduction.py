@@ -36,7 +36,9 @@ linear_layer.bias
 # creating a network using pytorch sequential
 model = nn.Sequential(
   nn.Linear(10,5), # the parameters represent input and output respectively
-  nn.Linear(5,20), # notice that the next node input is equal to the prior nodes output
+  nn.Linear(5,20), # notice that the next node input is equal to the prior node's output
   nn.Linear(20,5)
 )
 model(input_tensor)
+
+# ---------- pytorch activation functions ----------
