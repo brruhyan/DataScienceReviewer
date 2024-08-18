@@ -30,4 +30,13 @@ print(output)
 linear_layer.weight
 linear_layer.bias
 
-# extra info: the linear layer operation performs matrix multiplication of input_tensor and the weights and then added by the bias 
+# EXTRA INFO: the linear layer operation performs matrix multiplication of input_tensor and the weights and then added by the bias 
+# EXTRA INFO: when we call the nn.Linear, the weights and biases are initialized randomly
+
+# creating a network using pytorch sequential
+model = nn.Sequential(
+  nn.Linear(10,5), # the parameters represent input and output respectively
+  nn.Linear(5,20), # notice that the next node input is equal to the prior nodes output
+  nn.Linear(20,5)
+)
+model(input_tensor)
