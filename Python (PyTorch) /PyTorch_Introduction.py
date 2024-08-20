@@ -134,4 +134,33 @@ optimizer.step()
 
 # OPTIMIZER: handles updating model parameters based on local gradients
 
-# ---------- pytorch training our network ----------
+# ---------- pytorch training loop (MSE) ----------
+
+# setting up the training loop
+dataset = TensorDataset(torch.tensor(features).float(), torch.tensor(target).float()) # modifies the data type of the dataset to float
+dataloader = DataLoader(dataset, batch_size = 4, shuffle = True) # creates batches of data that is passed through the model. 
+#creating the model
+model = nn.Sequential(
+  nn.Linear(4,2),
+  nn.Linear(2,1)
+)
+# creating the loss and optimizer
+criterion = nn.MSELoss()
+optimizer = optim.SGD(model.parameters(), lr = 0.001)
+
+# TRAINING PROCESS: creating the model, choosing a loss function, creating a dataset, define an optimizer.
+
+# actual training loop
+for epoch in range(num_epochs):
+  for data in dataloader:
+    # initial gradients to zero
+    optimizer.zero_grad()
+    # fetching the feature and target from the dataset
+    feature, target = data
+    # forward passing
+    pred = model(feature)
+    # compute loss and gradients 
+    loss = criterion(pred, target)
+    loss.backward()
+    # update the weights and biases of the model
+    optimizer.step()
