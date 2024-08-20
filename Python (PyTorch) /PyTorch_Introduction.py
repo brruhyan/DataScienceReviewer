@@ -42,3 +42,20 @@ model = nn.Sequential(
 model(input_tensor)
 
 # ---------- pytorch activation functions ----------
+
+# SIGMOID: primarily used for binary classification (0 and 1) 
+# SIGMOID: we take thge pre-activation (class parameters) and pass it to the sigmoid and we can obtain a value between 0 and 1
+
+# implemeting sigmoid function
+model = nn.Sequential(
+  nn.Linear(10,5), 
+  nn.Linear(5,20), 
+  nn.Linear(20,5)
+  nn.Sigmoid()
+)
+
+# SOFTMAX: takes the class vector as the input and outputs the same size
+# SOFTMAX: primariliy used for multiple classification
+
+probability = nn.Softmax(dim = -1)
+output = probability(input_tensor)
