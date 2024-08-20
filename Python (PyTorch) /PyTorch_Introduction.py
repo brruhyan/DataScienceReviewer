@@ -59,3 +59,23 @@ model = nn.Sequential(
 
 probability = nn.Softmax(dim = -1)
 output = probability(input_tensor)
+
+# ---------- pytorch training neural network ----------
+
+# FORWARD PASS: input data is passed forward and propagated through the network
+# BACKPROPAGATION: the weights and biases are updated during training
+
+# implementing forward pass
+n_classes = 3 
+model = nn.Sequential(
+  nn.Linear(6,4), 
+  nn.Linear(4, n_classes), 
+  nn.Softmax(dim = -1)
+)
+
+# regression with forward pass
+model = nn.Sequential(
+  nn.Linear(6,4),
+  nn.Linear(4,1)
+)
+output = model(input_data)
