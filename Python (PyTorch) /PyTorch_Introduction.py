@@ -79,3 +79,20 @@ model = nn.Sequential(
   nn.Linear(4,1)
 )
 output = model(input_data)
+
+# ---------- pytorch loss functions ----------
+
+# one hot encoding concepts
+import torch.nn.functional as F
+F.one_hot(torch_tensor(0), num_classes = 3) # tensor([1,0,0])
+F.one_hot(torch_tensor(1), num_classes = 3) # tensor([0,1,0])
+
+# cross entropy loss in pytorch
+from torch.nn import CrossEntropyLoss
+scores = tensors([[-0.1211, 0.1059]])
+one_hot_target = tensor([[1,0]]) # output must be predicted in the first class
+criterion = CrossEntropyLoss()
+criterion(scores.double(), one_hot_target.double())
+
+# LOSS FUNCTION: takes the scores, aka the model prediction before the softmax function 
+# LOSS FUNCTION: and takes the one_hot_target, which is the desired output. the lower the loss the better 
