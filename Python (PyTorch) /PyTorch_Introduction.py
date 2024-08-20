@@ -96,3 +96,39 @@ criterion(scores.double(), one_hot_target.double())
 
 # LOSS FUNCTION: takes the scores, aka the model prediction before the softmax function 
 # LOSS FUNCTION: and takes the one_hot_target, which is the desired output. the lower the loss the better 
+
+# ---------- pytorch updating model parameters ----------
+
+# DERIVATIVES: when a model is generated layer weights and biases are randomized
+# DERIVATIVES: backpropation allows the model to have non-randomized weights and biases
+
+# BACKPROPAGATION: loss function is retunred to the previous linear layers
+# BACKPROPAGATION: it calculates the local gradients for L0, L1, L2
+# BACKPROPAGATION: the loss gradients are calculated with respect to the last layer
+# BACKPROPAGATION: we then use those layers to calculate the gradients for the previous layers
+
+# backpropagation in PyTorch
+model = nn.Sequential(
+  nn.Linear(6,4),
+  nn.Linear(4,1)
+)
+criterion = CrossEntropyLoss()
+loss = criterion(prediction, target)
+loss.backward # this effectively modifies the gradient of the layers 
+model[0].weight.grad, model[0].bias.grad
+
+# updating layer parameters manually
+lr = 0.001
+weight = model[0].weight
+weight_grad = model[0].weight.grad
+weight = weight = lr * weight_grad
+# updating the biases manually
+bias = model[0].bias
+bias_grad = model[0].bias.grad
+bias = bias - lr * bias_grad
+
+# importing optimizers
+import torch.optim as optim
+optimizer = optim.SGD(model.parameters(), lr = 0.001)
+
+# OPTIMIZER: handles updating model parameters based on local gradients
