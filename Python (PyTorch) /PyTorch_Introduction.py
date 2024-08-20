@@ -130,5 +130,8 @@ bias = bias - lr * bias_grad
 # importing optimizers
 import torch.optim as optim
 optimizer = optim.SGD(model.parameters(), lr = 0.001)
+optimizer.step()
 
 # OPTIMIZER: handles updating model parameters based on local gradients
+
+# ---------- pytorch training our network ----------
